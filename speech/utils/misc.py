@@ -67,3 +67,10 @@ def copy_files(file_path, destination_folder):
         print('The file at path: '+file_path+' does not exist, please check')
         return
     copy2(file_path, destination_folder)
+
+from pydub import AudioSegment
+
+def stereo_to_mono(input, output):
+    sound = AudioSegment.from_wav(input)
+    sound = sound.set_channels(1)
+    sound.export(output, format="wav")

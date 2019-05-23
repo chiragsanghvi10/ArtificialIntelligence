@@ -2,7 +2,9 @@ chunk_folder_path: /home/absin/Documents/dev/sentenceSimilarity/speech/transcrip
 host: db.talentify.in
 password: cx6ac54nmgGtLD1y
 stereo_folder: /home/absin/Documents/dev/sentenceSimilarity/speech/transcription/transfer_learning/calls_dual/
-
+emotion:
+  model_path: /home/absin/Documents/dev/ai/speech/emotion/models/model.json
+  weight_path: /home/absin/Documents/dev/ai/speech/emotion/models/Emotion_Voice_Detection_Model.h5
 deepspeech:
   model_path: /root/DeepSpeech/models/output_graph.pbmm
   alphabet_path: /root/DeepSpeech/models/alphabet.txt

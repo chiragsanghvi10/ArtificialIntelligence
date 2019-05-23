@@ -93,6 +93,17 @@ def emotion():
     emotion_blocks = analysis_api.emotion(task_url, task_id, loaded_model)
     return jsonpickle.encode(emotion_blocks)
 
+@app.route("/emotion_stream", methods=['GET', 'POST'])
+def emotion_stream():
+    task_id = request.args.get("task_id")
+    url = request.args.get("url")
+    global loaded_model
+    if loaded_model is None:
+        loaded_model = emotion_api.getModel()
+        loaded_model._make_predict_function()
+    emotion_blocks = emotion_api.windowing_emotion(url, task_id, loaded_model)
+    return jsonpickle.encode(emotion_blocks)
+
 @app.route("/chunks", methods=['GET', 'POST'])
 def chunks():
     page = request.args['page']
