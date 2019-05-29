@@ -13,6 +13,7 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import json
 import uuid
+from text import bert_mrpc as bert_api
 
 app = Flask(__name__)
 loaded_model = None
@@ -34,6 +35,14 @@ def sentence_similarity():
     sentence1 = request.form['sentence1']
     sentence2 = request.form['sentence2']
     return sentence_similarity_api.fast_sentence_similarity(sentence1, sentence2, g, output, session, messages)
+
+@app.route('/sentence_similarity_bert', methods=['GET', 'POST'])
+def sentence_similarity_bert():
+    sentence1 = request.form["sentence1"]
+    sentence2 = request.form["sentence2"]
+    semantic_similarity = bert_api.predict(sentence1, sentence2)
+    print('Sentence1: {}\n Sentence2: {}\nSimilarity: {}'.format(sentence1, sentence2, semantic_similarity['similarity']))
+    return jsonpickle.encode(semantic_similarity)
 
 @app.route("/transcibe", methods=['GET', 'POST'])
 def transcibe():
