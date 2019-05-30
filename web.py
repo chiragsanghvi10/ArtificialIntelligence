@@ -14,24 +14,45 @@ import tensorflow_hub as hub
 import json
 import uuid
 from text import bert_mrpc as bert_api
+import shutil
+import os
 
 app = Flask(__name__)
 loaded_model = None
 pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
 embed = g = session = messages = output = None
 
+def perform_graph_setup():
+    global embed,g,session,messages,output
+    print("Loading tensorflow graph for the first request")
+    module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/3"
+    os.environ['TFHUB_CACHE_DIR']='/home/absin/tfhub'
+    #if os.path.exists(os.environ['TFHUB_CACHE_DIR']) and os.path.isdir(os.environ['TFHUB_CACHE_DIR']):
+    #    shutil.rmtree(os.environ['TFHUB_CACHE_DIR'])
+    #os.makedirs(os.environ['TFHUB_CACHE_DIR'])
+    embed = hub.Module(module_url)
+    print("While first request loading hub module downloaded..")
+    g = tf.get_default_graph()
+    session = tf.Session(graph=g)
+    session.run([tf.global_variables_initializer(), tf.tables_initializer()])
+    messages = tf.placeholder(dtype=tf.string, shape=[None])
+    output = embed(messages)
+    print('Successfully initialized sentence similarity variables')
+
+@app.route("/sentence_similarity_many", methods=['GET', 'POST'])
+def sentence_similarity_many():
+    global embed,g,session,messages,output
+    if g == None:
+        perform_graph_setup()
+    sentence = request.form['sentence']
+    sentences = request.form['sentences']
+    return sentence_similarity_api.fast_sentence_similarity_many(sentence, sentences, g, output, session, messages)
+
 @app.route("/sentence_similarity", methods=['GET', 'POST'])
 def sentence_similarity():
     global embed,g,session,messages,output
     if g == None:
-        module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/3"
-        embed = hub.Module(module_url)
-        g = tf.get_default_graph()
-        session = tf.Session(graph=g)
-        session.run([tf.global_variables_initializer(), tf.tables_initializer()])
-        messages = tf.placeholder(dtype=tf.string, shape=[None])
-        output = embed(messages)
-        print('Successfully initialized sentence similarity variables')
+        perform_graph_setup()
     sentence1 = request.form['sentence1']
     sentence2 = request.form['sentence2']
     return sentence_similarity_api.fast_sentence_similarity(sentence1, sentence2, g, output, session, messages)

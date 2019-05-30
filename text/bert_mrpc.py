@@ -11,7 +11,7 @@ from lib.bert import  optimization
 from lib.bert import  tokenization
 
 
-BERT_PRETRAINED_DIR='/home/absin/Documents/dev/bert/model/msrc/'
+BERT_PRETRAINED_DIR='/home/absin/Documents/dev/bert/model/msrc/model_base/'
 CONFIG_FILE = os.path.join(BERT_PRETRAINED_DIR, 'bert_config.json')
 VOCAB_FILE = os.path.join(BERT_PRETRAINED_DIR, 'vocab.txt')
 #INIT_CHECKPOINT = os.path.join(BERT_PRETRAINED_DIR, 'bert_model.ckpt')
@@ -23,7 +23,7 @@ ITERATIONS_PER_LOOP=1000
 NUM_TPU_CORES=8
 TRAIN_BATCH_SIZE = 32
 EVAL_BATCH_SIZE = 8
-PREDICT_BATCH_SIZE = 1
+PREDICT_BATCH_SIZE = 4
 LEARNING_RATE=2e-5
 NUM_TRAIN_EPOCHS = 3.0
 MAX_SEQ_LENGTH = 128

@@ -1,10 +1,12 @@
 {
-	"id": "f88b7eef-9f35-c222-ae49-c890fd010ed2",
+	"id": "da1b2f92-34a0-5c12-6599-9e98fdb79f83",
 	"name": "AI-Flask",
 	"description": "",
 	"order": [
-		"b27309ba-9635-d422-d0e9-45aa37317b5e",
-		"c6e6ed1e-a597-a3f6-586a-2dedf69f156a"
+		"9af213b1-76df-71c6-9774-f247cc295218",
+		"08b15cc7-986e-662f-7390-d323c15a4e17",
+		"9cbe96a3-7c81-9f08-d41d-ead53c4c8360",
+		"06bc7f75-c3e2-3984-d828-c10fd351c3cd"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -13,43 +15,7 @@
 	"public": false,
 	"requests": [
 		{
-			"id": "b27309ba-9635-d422-d0e9-45aa37317b5e",
-			"headers": "",
-			"headerData": [],
-			"url": "35.200.228.189:5010/sentence_similarity",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [
-				{
-					"key": "sentence1",
-					"value": "Hello",
-					"description": "",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "sentence2",
-					"value": "Good bye",
-					"description": "",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1555074376443,
-			"name": "Sentence Similarity",
-			"description": "",
-			"collectionId": "f88b7eef-9f35-c222-ae49-c890fd010ed2",
-			"responses": []
-		},
-		{
-			"id": "c6e6ed1e-a597-a3f6-586a-2dedf69f156a",
+			"id": "06bc7f75-c3e2-3984-d828-c10fd351c3cd",
 			"headers": "",
 			"headerData": [],
 			"url": "http://35.200.228.189:5010/transcibe?task_id=17917498&language=en-IN&model=False&engine=deepspeech",
@@ -87,7 +53,7 @@
 			"pathVariableData": [],
 			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "f88b7eef-9f35-c222-ae49-c890fd010ed2",
+			"collectionId": "da1b2f92-34a0-5c12-6599-9e98fdb79f83",
 			"data": null,
 			"dataMode": "params",
 			"name": "transcription",
@@ -98,7 +64,116 @@
 			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {}
+			"helperAttributes": {},
+			"collection_id": "da1b2f92-34a0-5c12-6599-9e98fdb79f83"
+		},
+		{
+			"id": "08b15cc7-986e-662f-7390-d323c15a4e17",
+			"headers": "",
+			"headerData": [],
+			"url": "35.200.228.189:5010/sentence_similarity_bert",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "sentence1",
+					"value": "Hello",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sentence2",
+					"value": "Good bye",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1559199597983,
+			"name": "Sentence Similarity  Bert",
+			"description": "",
+			"collectionId": "da1b2f92-34a0-5c12-6599-9e98fdb79f83",
+			"responses": []
+		},
+		{
+			"id": "9af213b1-76df-71c6-9774-f247cc295218",
+			"headers": "",
+			"headerData": [],
+			"url": "35.200.228.189:5010/sentence_similarity",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "sentence1",
+					"value": "Hello",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sentence2",
+					"value": "Good bye",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1559199956035,
+			"name": "Sentence Similarity",
+			"description": "",
+			"collectionId": "da1b2f92-34a0-5c12-6599-9e98fdb79f83",
+			"responses": []
+		},
+		{
+			"id": "9cbe96a3-7c81-9f08-d41d-ead53c4c8360",
+			"headers": "",
+			"headerData": [],
+			"url": "127.0.0.1:5010/sentence_similarity_many",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "sentence",
+					"value": "Hello",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sentences",
+					"value": "[\"Good morning\",\"Good evening\",\"Good night\"]",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1559201187150,
+			"name": "Sentence Similarity  Many",
+			"description": "",
+			"collectionId": "da1b2f92-34a0-5c12-6599-9e98fdb79f83",
+			"responses": []
 		}
 	]
 }
